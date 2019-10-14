@@ -1,13 +1,13 @@
 ---
 layout: post
-title: SpingCloud Gateway 网关
+title: SpringBoot
 date: 2019-11-14
-tags: spingcloud
+tags: SpringBoot
 ---
 
 # 前言
 
-在看SpringCloud之前，看下SpingBoot的启动流程
+SpingBoot的启动流程
 
 ## SpingBoot 启动流程
 ### 启动类
