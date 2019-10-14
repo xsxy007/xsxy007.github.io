@@ -40,6 +40,25 @@
     });
     gitment.render('gitmentContainer');
     </script>
+{% elsif site.comment.gittalk %}
+    <!-- Link Gitalk 的支持文件  -->
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+    <script type="text/javascript" src="/assets/js/md5.min.js"></script>
+    <div id="gitalk-container"></div>     
+    <script type="text/javascript">
+        var gitalk = new Gitalk({
+        // gitalk的主要参数
+            clientID: "{{site.comment.gittalk.clientID}}",
+            clientSecret: "{{site.comment.gittalk.clientSecret}}",
+            repo: "{{site.comment.gittalk.repo}}",
+            owner: "{{site.comment.gittalk.owner}}",
+            admin: "{{site.comment.gittalk.admin}}",
+            id: md5(location.pathname),
+        });
+        gitalk.render('gitalk-container');
+    </script> 
+    <!-- Gitalk end -->
   {% endif %}
 
 </section>
