@@ -53,7 +53,7 @@
             clientSecret: "{{site.comment.gittalk.clientSecret}}",
             repo: "{{site.comment.gittalk.repo}}",
             owner: "{{site.comment.gittalk.owner}}",
-            admin: "{{site.comment.gittalk.admin}}",
+            admin: ["{{site.comment.gittalk.admin}}",],
             id: md5(location.pathname),
         });
         gitalk.render('gitalk-container');

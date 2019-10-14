@@ -14,11 +14,11 @@ comment:
     # gitment: xxx // 需要修改 comments.html中的client_id和client_secret
     # uyan: 2143225  # 有言id,登录有言官网申请
     gittalk:
-        clientID: '6e76f0633fcc08a72035',
-        clientSecret: '8d65f03ba5ef7e659f147788d5661ae41265d637',
-        repo: 'xsxy007.github.io',
-        owner: 'xsxy007',
-        admin: ['xsxy007']
+        clientID: 6e76f0633fcc08a72035,
+        clientSecret: 8d65f03ba5ef7e659f147788d5661ae41265d637,
+        repo: xsxy007.github.io,
+        owner: xsxy007,
+        admin: xsxy007
         
 
 # Social
