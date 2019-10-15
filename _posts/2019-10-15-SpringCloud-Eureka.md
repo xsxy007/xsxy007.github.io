@@ -17,6 +17,7 @@ tags: springcloud
 > springboot 已经很好的支持了Eureka，只需要在pom中加入Eureka依赖，并在Application启动类中加上相关注解即可
 
 1、pom依赖添加
+
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -24,6 +25,7 @@ tags: springcloud
 </dependency>
 ```
 2、在启动类上加注解`@EnableEurekaServer`注解
+
 ```java
 @SpringBootApplication
 @EnableEurekaServer
@@ -55,6 +57,7 @@ eureka:
 
 4、启动项目
 **报错**
+
 > 使用springboot2.1.9.release版本时，配置eureka server后，启动项目报错（具体原因未查到），本次使用的是2.0版本
 
 
@@ -162,7 +165,6 @@ public class EurekaServerAutoConfiguration extends WebMvcConfigurerAdapter {
 		}).start(); // 调用 start 方法启动线程
 	}
 ```
-
 
 
 
