@@ -18,11 +18,50 @@ tags: springcloud
 
 1、pom依赖添加
 
+**本次使用的springboot版本为2.1.9；springcloud版本为Greenwich.RELEASE**
+
+> 以下列出了所有的依赖（ps：一开始因为springcloud和springboot的版本依赖问题，导致项目一直启动报错）
+
 ```xml
-<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-</dependency>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 ```
 2、在启动类上加注解`@EnableEurekaServer`注解
 
@@ -40,7 +79,7 @@ public class SpringcloudDemoApplication {
 > 在默认配置下，该注册中心会将自己作为客户端尝试注册自己，因此在单机的注册中心时，需要将此机制关闭掉
 ```yml
 server:
-  port: 8761
+  port: 8761 # 使用的是默认的端口
 spring:
   application:
     name: eureka-server
@@ -56,19 +95,23 @@ eureka:
 `eureka.client.service-url.defaultZone`：表示注册中心的地址（默认为localhost:8761/eureka/）
 
 4、启动项目
-**报错**
 
-> 使用springboot2.1.9.release版本时，配置eureka server后，启动项目报错（具体原因未查到），本次使用的是2.0版本
+启动项目后访问`localhost:8761`  即可显示如下页面，此时 Instances current Registers里边并没有内容
+
+![1571143069922](/images/posts/2019/eureka-show.png)
 
 
-# 集群
+
+
+# 集群配置
 > 简单的集群，只要将各个注册中心相互配置即可
-`eureka.client.serviceUrl.defaultZone=http://域名:/${server.port}/eureka/,http://域名:/${server.port}/eureka/`  请其他注册中心的地址配置的defaultZone中
+> `eureka.client.serviceUrl.defaultZone=http://域名:/${server.port}/eureka/,http://域名:/${server.port}/eureka/`  请其他注册中心的地址配置的defaultZone中
+
 
 
 # 源码分析
 
-## 从启动类注解开始@EnableEurekaServer
+## 从启动类注解开始 @EnableEurekaServer
 * 可以注意注释中的`EurekaServerAutoConfiguration`，该类就是EurekaServer的自动配置类
 ```java
 /**
@@ -86,7 +129,7 @@ public @interface EnableEurekaServer {
 ```
 * 再看上边注解类上有一个 @Import(EurekaServerMarkerConfiguration.class)，进入该类查看
 ```java
-// 可以看到，该类并没有什么实现，  该类的作用：是为了控制 `EurekaServerAutoConfiguration` 类是否加载
+// 可以看到，该类并没有什么实现，该类的作用：是为了控制 `EurekaServerAutoConfiguration` 类是否加载
 @Configuration
 public class EurekaServerMarkerConfiguration {
 	@Bean
@@ -150,7 +193,8 @@ public class EurekaServerAutoConfiguration extends WebMvcConfigurerAdapter {
 			public void run() {
 				try {
 					//TODO: is this class even needed now?
-					eurekaServerBootstrap.contextInitialized(EurekaServerInitializerConfiguration.this.servletContext);
+					eurekaServerBootstrap.contextInitialized(
+            			EurekaServerInitializerConfiguration.this.servletContext);
 					log.info("Started Eureka Server");
 
 					publish(new EurekaRegistryAvailableEvent(getEurekaServerConfig()));
@@ -168,4 +212,4 @@ public class EurekaServerAutoConfiguration extends WebMvcConfigurerAdapter {
 
 
 
-[参考](https://blog.csdn.net/boling_cavalry/article/details/81809860)
+[参考： https://blog.csdn.net/cuixhao110/article/details/88353714 ]( https://blog.csdn.net/cuixhao110/article/details/88353714 )
