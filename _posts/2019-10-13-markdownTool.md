@@ -39,8 +39,6 @@ css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器
 
 # 格式整理
 
-# 欢迎使用 Markdown在线编辑器 MdEditor
-
 **Markdown是一种轻量级的「标记语言」**
 
 

@@ -15,6 +15,7 @@ tags: springcloud
 
 ## Eureka Server
 > springboot 已经很好的支持了Eureka，只需要在pom中加入Eureka依赖，并在Application启动类中加上相关注解即可
+
 1、pom依赖添加
 ```xml
 <dependency>
