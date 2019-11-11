@@ -5,7 +5,7 @@ date: 2019-11-05
 tags: python
 ---
 
-> python 学习
+> python 学习(python3)
 
 ## python 100例练习
 
@@ -485,4 +485,380 @@ for i in range(1,21):
     s += t
 
 print('1! + 2! + 3! + ... + 20! = {}'.format(s))
+```
+
+26、利用递归方法求5!
+
+```python
+sum = 0
+def fact(n):
+    if n == 0:
+        sum = 1
+    else:
+        sum = n * fact(n - 1)
+    return sum
+
+print(fact(5))
+```
+
+27、利用递归函数调用方式，将所输入的5个字符，以相反顺序打印出来。
+
+```python
+
+def output(s,n):
+    if n == 0:
+        return
+    print(s[n-1],end=" ")
+    output(s,n-1)
+
+s = input("输入字符串：\n")
+
+l = len(s)
+
+output(s,l)
+
+```
+
+28、有5个人坐在一起，问第五个人多少岁？他说比第4个人大2岁。问第4个人岁数，他说比第3个人大2岁。问第三个人，又说比第2人大两岁。问第2个人，说比第一个人大两岁。最后问第一个人，他说是10岁。请问第五个人多大？
+
+```python
+def age(n):
+    if n == 1:
+        c = 10
+    else:
+        c = age(n - 1) + 2
+    return c
+
+print(age(5))
+
+```
+
+29、给一个不多于5位的正整数，要求：一、求它是几位数，二、逆序打印出各位数字。
+
+```python
+x = int(input("输入一个数字：\n"))
+
+if int(x / 10000) != 0:
+    print("五位数")
+elif int(x % 10000 / 1000) != 0:
+    print("四位数")
+elif int(x % 1000 / 100) != 0:
+    print("三位数")
+elif int(x % 100 / 10) != 0:
+    print("二位数")
+else:
+    print("一位数")
+```
+
+30、一个5位数，判断它是不是回文数。即12321是回文数，个位与万位相同，十位与千位相同。
+
+```python
+x = int(input("输入一个数字：\n"))
+
+str = str(x)
+len = len(str)
+flag = True
+for i in range(int(len / 2)):
+    if(str[i] != str[- i - 1]):
+        flag = False
+        break
+
+
+if flag:
+    print("是回文数")
+else:
+    print("不是回文数")
+
+```
+
+31、请输入星期几的第一个字母来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母。
+
+```python
+str = input("please input:")
+
+if str == 'S':
+    print('please input second letter:')
+    str = input("please input:")
+    if str == 'a':
+        print('Saturday')
+    elif str == 'u':
+        print('Sunday')
+    else:
+        print('data error')
+
+elif str == 'F':
+    print('Friday')
+
+elif str == 'M':
+    print('Monday')
+
+elif str == 'T':
+    print('please input second letter')
+    str = input("please input:")
+
+    if str == 'u':
+        print('Tuesday')
+    elif str == 'h':
+        print('Thursday')
+    else:
+        print('data error')
+
+elif str == 'W':
+    print('Wednesday')
+else:
+    print('data error')
+
+```
+
+32、按相反的顺序输出列表的值。
+
+```python
+a = ['aaa','bbb','ccc']
+
+for i in a[::-1]:
+    print(i)
+
+```
+
+33、按逗号分隔列表。
+
+```python
+list = [1,2,3,4,5]
+
+s1 = ','.join(str(n) for n in list)
+
+print(s1)
+```
+
+35、文本颜色设置。
+
+```python
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+print( bcolors.HEADER + "字体?" + bcolors.ENDC)
+print( bcolors.OKBLUE + "蓝色字体?" + bcolors.ENDC)
+print( bcolors.OKGREEN + "绿色字体?" + bcolors.ENDC)
+print( bcolors.WARNING + "警告的颜色字体?" + bcolors.ENDC)
+print( bcolors.FAIL + "失败?" + bcolors.ENDC)
+print( bcolors.ENDC + "结束符号" + bcolors.ENDC)
+print( bcolors.BOLD + "加粗?" + bcolors.ENDC)
+print( bcolors.UNDERLINE + "下划线?" + bcolors.ENDC)
+```
+
+36、求100之内的素数。
+
+```python
+for num in range(1,101):
+    for i in range(2,num):
+        if (num % i) == 0:
+            break
+    else:
+        print(num)
+```
+
+37、对10个数进行排序。
+
+```python
+nums = [2,1,3,2,4,5,3,2,7,0]
+
+nums.sort()
+
+print("-----")
+
+for i in nums:
+    print(i, end=" ")
+
+```
+
+38、求一个3*3矩阵主对角线元素之和。
+
+```python
+a = [[1,1,2],[3,3,3],[1,2,3]]
+
+sum = 0
+for i in range(3):
+    for j in range(3):
+        sum += a[i][i]
+
+print(sum)
+```
+
+39、有一个已经排好序的数组。现输入一个数，要求按原来的规律将它插入数组中。
+
+```python
+
+if __name__ == '__main__':
+    # 0作为加入数字的占位
+    a = [1,3,4,5,6,7,8,13,15,100,0]
+    print("原始列表")
+    for i in a:
+        print(i, end=" ")
+
+    number = int(input("\n 插入一个数字：\n"))
+    end = a[9]
+    if number > end:
+        a[10] = number
+    else:
+        for i in  range(10):
+            if a[i] > number:
+                temp = a[i]
+                a[i] = number
+                for j in range(i + 1, 11):
+                    temp1 = a[j]
+                    a[j] = temp
+                    temp = temp1
+                break
+
+    print("插入后")
+    for i in a:
+        print(i,end=" ")
+
+```
+
+40、将一个数组逆序输出。
+
+```python
+a = [1,2,3,4,5,6]
+
+print("原数组:" + str(a))
+
+for i in a[::-1]:
+    print(i,end=" ")
+
+```
+
+41、模仿静态变量的用法。
+
+```python
+def varfunc():
+    var = 0
+    print('var = %d' % var)
+    var += 1
+if __name__ == '__main__':
+    for i in range(3):
+        varfunc()
+
+# 类的属性
+# 作为类的一个属性吧
+class Static:
+    StaticVar = 5
+    def varfunc(self):
+        self.StaticVar += 1
+        print(self.StaticVar)
+
+print(Static.StaticVar)
+a = Static()
+for i in range(3):
+    a.varfunc()
+```
+
+43、模仿静态变量(static)另一案例。
+
+```python
+class Num:
+    nNum = 1
+
+    def inc(self):
+        self.nNum += 1
+        print('class Num中的：nNum = %d' % self.nNum)
+
+
+if __name__ == '__main__':
+    nNum = 2
+    inst = Num()
+    for i in range(3):
+        nNum += 1
+        print('外边循环中的num：The num = %d' % nNum)
+        inst.inc()
+
+```
+
+44、两个 3 行 3 列的矩阵，实现其对应位置的数据相加，并返回一个新矩阵：
+
+X = [[12,7,3],
+    [4 ,5,6],
+    [7 ,8,9]]
+
+Y = [[5,8,1],
+    [6,7,3],
+    [4,5,9]]
+
+```python
+X = [[12,7,3],
+    [4,5,6],
+    [7,8,9]]
+
+Y = [[5,8,1],
+    [6,7,3],
+    [4,5,9]]
+
+res = [[0,0,0],
+       [0,0,0],
+       [0,0,0]]
+
+for x in range(len(X)):
+    for y in range(len(X[0])):
+        res[x][y] = X[x][y] + Y[x][y]
+
+for i in res:
+    print(i)
+```
+
+45、统计 1 到 100 之和。
+
+```python
+res = 0
+
+for i in range(1,101):
+    res += i
+
+print("和：{}".format(res))
+```
+
+46、求输入数字的平方，如果平方运算后小于 50 则退出。
+
+```python
+def SQ(x):
+    return x * x
+
+again = True
+
+while again:
+    num = int(input("请输入一个数字："))
+    print("运算结果为：{}".format(SQ(num)))
+    if SQ(num) >= 50:
+        again = True
+    else:
+        again = False
+
+```
+
+47、两个变量值互换。
+
+```python
+def exchage(x,y):
+    x,y = y,x
+    return (x,y)
+
+if __name__ == '__main__':
+    x = 10
+    y = 20
+    print("x = {}, y = {}".format(x,y))
+    x,y = exchage(x,y)
+    print("x = {}, y = {}".format(x,y))
+
+```
+
+49、使用lambda来创建匿名函数。
+
+```python
+
 ```
