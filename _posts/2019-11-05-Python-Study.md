@@ -860,5 +860,82 @@ if __name__ == '__main__':
 49、使用lambda来创建匿名函数。
 
 ```python
+MAXIMUM = lambda x, y: (x > y) * x + (x < y) * y
+MINIMUM = lambda x, y: (x > y) * y + (x < y) * x
 
+if __name__ == '__main__':
+    a = 10
+    b = 20
+    print( 'The largar one is %d' % MAXIMUM(a, b))
+
+    print('The lower one is %d' % MINIMUM(a, b))
 ```
+
+50、输出一个随机数。
+
+```python
+import random
+
+# 生成0,1的随机数
+print(random.random())
+# 生成10到20中间的随机数
+print(random.uniform(10,20))
+# 生成10到20的随机整数
+print(random.randint(10,20))
+# 输出0,到99间的随机数
+print(random.choice([x for x in range(1,100)]))
+```
+
+55、按位取反~。
+
+```python
+if __name__ == '__main__':
+    a = 234
+    b = ~a
+    print('The a\'s 1 complement is %d' % b) # -235
+    a = ~a
+    print('The a\'s 2 complement is %d' % a) # -235
+```
+
+61、打印出杨辉三角形（要求打印出10行如下图）
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+1 8 28 56 70 56 28 8 1 
+1 9 36 84 126 126 84 36 9 1
+
+```python
+if __name__ == '__main__':
+    a = []
+    for i in range(10):
+        a.append([])
+        for j in range(10):
+            a[i].append(0)
+    for i in range(10):
+        a[i][0] = 1
+        a[i][i] = 1
+    for i in range(2,10):
+        for j in range(1,i):
+            a[i][j] = a[i - 1][j-1] + a[i - 1][j]
+    from sys import stdout
+    for i in range(10):
+        for j in range(i + 1):
+            stdout.write(str(a[i][j]))
+            stdout.write(' ')
+        print()
+```
+
+62、查找字符串。　
+
+```python
+sStr1 = 'abcdefg'
+sStr2 = 'cde'
+print(sStr1.find(sStr2))
+```
+
+63、
