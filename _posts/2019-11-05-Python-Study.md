@@ -960,3 +960,74 @@ canvas.pack()
 mainloop()
 ```
 
+67、输入数组，最大的与第一个元素交换，最小的与最后一个元素交换，输出数组。
+
+```python
+def inp(numbers):
+    for i in range(6):
+        numbers.append(int(input('输入一个数字:\n')))
+
+p = 0
+
+def arr_max(array):
+    max = 0
+    for i in range(1, len(array) - 1):
+        p = i
+        if array[p] > array[max]:
+            max = p
+    k = max
+    array[0], array[k] = array[k], array[0]
+
+
+def arr_min(array):
+    min = 0
+    for i in range(1, len(array) - 1):
+        p = i
+        if array[p] < array[min]:
+            min = p
+    l = min
+    array[5], array[l] = array[l], array[5]
+
+
+def outp(numbers):
+    for i in range(len(numbers)):
+        print(numbers[i])
+
+
+if __name__ == '__main__':
+    array = []
+    inp(array)  # 输入 6 个数字并放入数组
+    arr_max(array)  # 获取最大元素并与第一个元素交换
+    arr_min(array)  # 获取最小元素并与最后一个元素交换
+    print('计算结果：')
+    outp(array)
+```
+
+68、有 n 个整数，使其前面各数顺序向后移 m 个位置，最后 m 个数变成最前面的 m 个数
+
+```python
+if __name__ == '__main__':
+    n = int(input('整数 n 为:\n'))
+    m = int(input('向后移 m 个位置为:\n'))
+
+    def move(array, n, m):
+        array_end = array[n - 1]
+        for i in range(n - 1, -1, - 1):
+            array[i] = array[i - 1]
+        array[0] = array_end
+        m -= 1
+        if m > 0:
+            move(array, n, m)
+
+    number = []
+    for i in range(n):
+        number.append(int(input('输入一个数字:\n')))
+    print('原始列表:', number)
+
+    move(number, n, m)
+
+    print('移动之后:', number)
+
+```
+
+69、
